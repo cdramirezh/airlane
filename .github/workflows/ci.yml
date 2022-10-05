@@ -1,0 +1,24 @@
+# yaml is a format Github uses to automatically run 
+# 'Github actions', for example: to check the code in any push
+# The name is arbitrary, here is testing because I want to use for test
+name: Testing
+# on specifies when should this workflow run (every push)
+on: push
+
+# Jobs are the tasks that should happen
+jobs:
+  # The name of the job is arbitrary, test_project could be anything I like
+  test_project:
+    # What Github VM I like to run the job in
+    runs-on: ubuntu-latest
+    # What steps should Github do
+    steps:
+    # actions/checkout is a native Github action. I can write my own actions
+    - uses: actions/checkout@v2
+    # Name is just a description for me to know what's going on
+    - name: Run Django unit tests
+    # I need to install django for running all my tests
+    # Then I'll run my tests file
+      run: |
+        pip3 install --user django
+        python3 manage.py test
